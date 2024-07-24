@@ -12,7 +12,7 @@ saxtonrawls(sand, clay, OM, DF = 1, Rw = 0, Rv = NULL)
 
 \item{clay}{numeric, clay (<0.002 mm) content in decimal format (e.g. 0.25)}
 
-\item{OM}{numeric, Organic matter content in percentage (e.g., 2.5%)}
+\item{OM}{numeric, Organic matter content in percentage (e.g., 2.5)}
 
 \item{DF}{numeric, density factor, default value 1}
 

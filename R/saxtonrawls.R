@@ -4,7 +4,7 @@
 #'
 #' @param sand numeric, sand (0.5 - 2 mm) content in decimal format (e.g. 0.25)
 #' @param clay numeric, clay (<0.002 mm) content in decimal format (e.g. 0.25)
-#' @param OM numeric, Organic matter content in percentage (e.g., 2.5%)
+#' @param OM numeric, Organic matter content in percentage (e.g., 2.5)
 #' @param DF numeric, density factor, default value 1
 #' @param Rw numeric, Volume fraction of gravel in decimal format, g/cm3
 #' @param Rv numeric, Weight fraction of gravel in decimal format, g/g
@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-#' #Determine soil water characteristics for a single observation test
+#' #Determine soil water characteristics for a single observation
 #' saxtonrawls(sand=0.45, clay=0.35, OM=4, DF=1, Rw=0.10)
 #'
 #'
