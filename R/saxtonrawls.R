@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-#' #Determine soil water characteristics for a single observation
+#' #Determine soil water characteristics for a single observation test
 #' saxtonrawls(sand=0.45, clay=0.35, OM=4, DF=1, Rw=0.10)
 #'
 #'
