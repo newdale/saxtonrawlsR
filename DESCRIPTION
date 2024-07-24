@@ -1,0 +1,16 @@
+Package: saxtonrawlsR
+Type: Package
+Title: R Implementation of Saxton and Rawls Soil Water Characteristics (2006)
+Version: 0.1.0
+Authors@R: 
+    c(person(given = "Daniel",
+           family = "Saurette",
+           role = c("aut", "cre"),
+           email = "daniel.saurette@ontario.ca",
+           comment = c(ORCID = "0000-0002-1971-1238")))
+Maintainer: Daniel Saurette <daniel.saurette@ontario.ca>
+Description: This is an R implementatoin of the Soil water Characteristics equaitons by Saxton and Rawls.
+License: MIT + file
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.1
