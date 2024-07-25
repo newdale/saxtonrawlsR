@@ -1,0 +1,11 @@
+bibentry(
+  bibtype  = "Article",
+  title    = Soil Water Characteristic Estimates by Texture and Organic Matter for Hydrologic Solutions,
+  author   = Saxton, K.E. and Rawls, W.J.,
+  journal  = Soil Science Society of America Journal,
+  year     = 2006,
+  volume   = 70,
+  number   = ,
+  pages    = 1569-1578,
+  doi      = https://doi.org/10.2136/sssaj2005.0117
+)

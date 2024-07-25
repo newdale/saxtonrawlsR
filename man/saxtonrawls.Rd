@@ -3,7 +3,8 @@
 \name{saxtonrawls}
 \alias{saxtonrawls}
 \title{Use particle size analysis data to determine
-Soil Water Characteristics based on Saxton and Rawls (2006)}
+Soil Water Characteristics based on Saxton and Rawls (2006)
+Available at: https://doi.org/10.2136/sssaj2005.0117}
 \usage{
 saxtonrawls(sand, clay, OM, DF = 1, Rw = 0, Rv = NULL)
 }
@@ -16,9 +17,9 @@ saxtonrawls(sand, clay, OM, DF = 1, Rw = 0, Rv = NULL)
 
 \item{DF}{numeric, density factor, default value 1}
 
-\item{Rw}{numeric, Volume fraction of gravel in decimal format, g/cm3}
+\item{Rw}{numeric, Volume fraction of gravel in decimal format, g/cm3, default is 0.}
 
-\item{Rv}{numeric, Weight fraction of gravel in decimal format, g/g}
+\item{Rv}{numeric, Weight fraction of gravel in decimal format, g/g, default is NULL.}
 }
 \value{
 matrix
@@ -26,6 +27,7 @@ matrix
 \description{
 Use particle size analysis data to determine
 Soil Water Characteristics based on Saxton and Rawls (2006)
+Available at: https://doi.org/10.2136/sssaj2005.0117
 }
 \examples{
 #Determine soil water characteristics for a single observation
