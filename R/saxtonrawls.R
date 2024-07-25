@@ -24,7 +24,6 @@
 #'
 saxtonrawls<- function(sand,clay,OM,DF=1,Rw=0,Rv=NULL){
 
-
   if(is.na(sand)){stop('Sand content is a required argument, please provide a value')}
   if(is.na(clay)){stop('Clay content is a required argument, please provide a value')}
   if(is.na(OM)){stop('Organic matter content is a required argument, please provide a value')}
