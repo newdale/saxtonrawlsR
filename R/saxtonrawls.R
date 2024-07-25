@@ -31,8 +31,8 @@ saxtonrawls<- function(sand,clay,OM,DF=1,Rw=0,Rv=NULL){
   if(OM>8){warning('Equations were calibrated with OM<8. Calculations with OM>8 should be scrutinized.')}
   if(clay>60){warning('Equations were calibrated with clay<60. Calculations with clay>60 should be scrutinized.')}
   if(clay>1 | sand >1){stop('Sand and clay content should be in decimal format but exceeds 1, please check input data')}
-  if(!is.null(Rw) & Rw>1){stop('Gravel content should be in decimal format but exceeds 1, please check input data')}
-  if(!is.null(Rv) & Rv>1){stop('Gravel content should be in decimal format but exceeds 1, please check input data')}
+  #if(!is.null(Rw) & Rw>1){stop('Gravel content should be in decimal format but exceeds 1, please check input data')}
+  #if(!is.null(Rv) & Rv>1){stop('Gravel content should be in decimal format but exceeds 1, please check input data')}
   if(clay+sand >1){stop('Sand+Clay exceeds 1 but should be in decimal format, please check input data')}
 
   # if gravel content is provided both as weight and volume, write warning and default to weight
