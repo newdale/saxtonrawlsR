@@ -24,12 +24,16 @@
 #'
 saxtonrawls<- function(sand,clay,OM,DF=1,Rw=0,Rv=NULL){
 
+
   if(is.na(sand)){stop('Sand content is a required argument, please provide a value')}
   if(is.na(clay)){stop('Clay content is a required argument, please provide a value')}
   if(is.na(OM)){stop('Organic matter content is a required argument, please provide a value')}
   if(DF<0.9 | DF>1.3){stop('DF values must be between 0.9 and 1.3')}
   if(OM>8){warning('Equations were calibrated with OM<8. Calculations with OM>8 should be scrutinized.')}
   if(clay>60){warning('Equations were calibrated with clay<60. Calculations with clay>60 should be scrutinized.')}
+  if(clay>1 | sand >1){stop('Sand and clay content should be in decimal format but exceeds 1, please check input data')}
+  if(Rw>1 | Rv >1){stop('Gravel content should be in decimal format but exceeds 1, please check input data')}
+  if(clay+sand >1){stop('Sand+Clay exceeds 1 but should be in decimal format, please check input data')}
 
   # if gravel content is provided both as weight and volume, write warning and default to weight
   if(!is.null(Rw) & !is.null(Rv)){warning('Gravel content was provided on weight and volume basis, using weight basis')}
