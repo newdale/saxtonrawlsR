@@ -11,7 +11,7 @@ Authors@R:
 Maintainer: Daniel Saurette <daniel.saurette@ontario.ca>
 Description: This is an R implementation of the Soil water Characteristics equations by Saxton and Rawls.
    The original paper is Saxton, K.E. and Rawls, W.J. (2006), 
-   Soil Water Characteristic Estimates by Texture and Organic Matter for Hydrologic Solutions. 
+   Soil Water Characteristic Estimates by Texture and Organic Matter for Hydrologic Solutions, 
    Soil Sci. Soc. Am. J., 70 1569-1578, https://doi.org/10.2136/sssaj2005.0117.
    
         
