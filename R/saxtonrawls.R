@@ -6,8 +6,8 @@
 #' @param clay numeric, clay (<0.002 mm) content in decimal format (e.g. 0.25)
 #' @param OM numeric, Organic matter content in percentage (e.g., 2.5)
 #' @param DF numeric, density factor, default value 1
-#' @param Rw numeric, Volume fraction of gravel in decimal format, g/cm3
-#' @param Rv numeric, Weight fraction of gravel in decimal format, g/g
+#' @param Rw numeric, Volume fraction of gravel in decimal format, g/cm3, default is 0.
+#' @param Rv numeric, Weight fraction of gravel in decimal format, g/g, default is NULL.
 #' @return matrix
 #' @export
 #'
@@ -23,7 +23,15 @@
 #'
 saxtonrawls<- function(sand,clay,OM,DF=1,Rw=0,Rv=NULL){
 
-  if(!is.na(sand) & !is.na(clay) & !is.na(OM) & !is.na(DF)){
+  if(is.na(sand)){stop('Sand content is a required argument, please provide a value')}
+  if(is.na(clay)){stop('Clay content is a required argument, please provide a value')}
+  if(is.na(OM)){stop('Organic matter content is a required argument, please provide a value')}
+
+  # if gravel content is provided both as weight and volume, write warning and default to weight
+  if(!is.null(Rw) & !is.null(Rv)){warning('Gravel content was provided on weight and volume basis, using weight basis')}
+  if(!is.null(Rw) & !is.null(Rv)){Rv<- NULL}
+
+  if(!is.na(sand) & !is.na(clay) & !is.na(OM)){
 
     # set the variables
     sand<- sand
@@ -89,8 +97,10 @@ saxtonrawls<- function(sand,clay,OM,DF=1,Rw=0,Rv=NULL){
     ksatb_s<- (1-Rw)/(1-Rw*(1-3*alpha/2))
     ksatb<- ksat*ksatb_s
 
-    return(c(Wilting_Point=round(o1500*100,1), Field_Capacity=round(o33df*100,1), Saturation=round(osdf*100,1),
-             Plant_Avail_Water =round(PAWb,2), KSat= round(ksatb,6), MatricBulkDensity= round(Dadj,2)))
+    out<- (c(Wilting_Point=round(o1500*100,3), Field_Capacity=round(o33df*100,3), Saturation=round(osdf*100,3),
+             Plant_Avail_Water =round(PAWb,3), KSat= round(ksatb,3), MatricBulkDensity= round(Dadj,3)))
+
+    return(out)
 
   } else {
     return(c(Wilting_Point=NA, Field_Capacity=NA, Saturation=NA,
