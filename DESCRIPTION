@@ -9,7 +9,12 @@ Authors@R:
            email = "daniel.saurette@ontario.ca",
            comment = c(ORCID = "0000-0002-1971-1238")))
 Maintainer: Daniel Saurette <daniel.saurette@ontario.ca>
-Description: This is an R implementatoin of the Soil water Characteristics equaitons by Saxton and Rawls.
+Description: This is an R implementation of the Soil water Characteristics equations by Saxton and Rawls.
+   The original paper is Saxton, K.E. and Rawls, W.J. (2006), 
+   Soil Water Characteristic Estimates by Texture and Organic Matter for Hydrologic Solutions. 
+   Soil Sci. Soc. Am. J., 70 1569-1578, https://doi.org/10.2136/sssaj2005.0117.
+   
+        
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
