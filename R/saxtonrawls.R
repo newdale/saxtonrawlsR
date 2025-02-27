@@ -6,9 +6,10 @@
 #' @param sand numeric, sand (0.5 - 2 mm) content in decimal format (e.g. 0.25)
 #' @param clay numeric, clay (<0.002 mm) content in decimal format (e.g. 0.25)
 #' @param OM numeric, Organic matter content in percentage (e.g., 2.5)
-#' @param DF numeric, density factor, default value 1
-#' @param Rw numeric, Volume fraction of gravel in decimal format, g/cm3, default is 0.
-#' @param Rv numeric, Weight fraction of gravel in decimal format, g/g, default is NULL.
+#' @param DF numeric, density factor, default value 1.
+#' @param EC numeric, electrical conductivity in dS/m, default value 0.
+#' @param Rw numeric, Volume fraction of gravel in decimal format, g/cm3, default value 0.
+#' @param Rv numeric, Weight fraction of gravel in decimal format, g/g, default value NULL.
 #' @return matrix
 #' @export
 #'
@@ -22,7 +23,7 @@
 #' mapply(saxtonrawls,sand=dat$sand, clay=dat$clay, OM=dat$OM, DF=dat$DF, Rw=dat$Rw)
 #'
 #'
-saxtonrawls<- function(sand,clay,OM,DF=1,Rw=0,Rv=NULL){
+saxtonrawls<- function(sand,clay,OM,DF=1,EC=0,Rw=0,Rv=NULL){
 
   if(is.na(sand)){stop('Sand content is a required argument, please provide a value')}
   if(is.na(clay)){stop('Clay content is a required argument, please provide a value')}
@@ -46,6 +47,9 @@ saxtonrawls<- function(sand,clay,OM,DF=1,Rw=0,Rv=NULL){
     clay<- clay
     OM<- OM
     DF<- DF
+    EC<- EC
+
+    #MOISTURE REGRESSIONS
 
     #estimate moisture at 1500 kPa
     o1500t<- -0.024*sand + 0.487*clay + 0.006*OM + 0.005*(sand*OM) - 0.013*(clay*OM) + 0.068*(sand*clay) + 0.031
@@ -69,26 +73,28 @@ saxtonrawls<- function(sand,clay,OM,DF=1,Rw=0,Rv=NULL){
     #estimate the bulk density based on saturation/porosity
     Dnorm<- (1-os)*2.65
 
-    #now we can adjust for density factor
+    #DENSITY EFFECTS
     Dadj<- Dnorm*DF
     osdf<- 1 - (Dadj/2.65)
     o33df<- o33 - 0.2*(os-osdf)
     os_33df<- osdf - o33df
+    alpha<- Dadj/2.65
 
     #estimate plant available water
     PAW<- o33df - o1500
 
-    #estimate lambda, the slope or logarithmic tension-moisture curve
+    #MOISTURE-TENSION
     B<- (log(1500)-log(33))/(log(o33df)-log(o1500))
     A<- exp(log(33) + B*log(o33))
+    psi33_e<- 33-((os-o33)*(33-psi_e)/os-o33)
+    psi1500_33<- A*os^(-B)
+
+    #MOISTURE-CONDUCTIVITY
     lambda<- 1/B
+    ksat<- 1930*(osdf - o33df)^(3-lambda)
+    #ko<- ksat*(o/os)^(3+(2/lambda))
 
-    #estimate saturated hydraulic conductivity
-    ksat<- 1930*(osdf - o33df)^(3-lambda) #removed the df
-
-    #modification for gravel content
-    alpha<- Dadj/2.65
-
+    # GRAVEL EFFECTS
     # gravel can be provided either as Rv or Rw
     # if provided as Rw, Rv is estimated below
     # if provided as Rv, values should be used directly
@@ -105,6 +111,10 @@ saxtonrawls<- function(sand,clay,OM,DF=1,Rw=0,Rv=NULL){
     ksatb_s<- (1-Rw)/(1-Rw*(1-3*alpha/2))
     ksatb<- ksat*ksatb_s
 
+    #SALINITY EFFECTS
+    osmo<- 36*EC
+    osmo_o<- (os/os)*(36*EC)
+
     out<- (c(Wilting_Point=round(o1500*100,3), Field_Capacity=round(o33df*100,3), Saturation=round(osdf*100,3),
              Plant_Avail_Water =round(PAWb,3), KSat= round(ksatb,3), MatricBulkDensity= round(Dadj,3)))
 
@@ -116,3 +126,5 @@ saxtonrawls<- function(sand,clay,OM,DF=1,Rw=0,Rv=NULL){
 
   }
 }
+
+saxtonrawls(0.2,0.2,2.5,0,0)
